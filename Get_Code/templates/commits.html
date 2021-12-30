@@ -8,9 +8,13 @@
     <h3>Commits:</h3>
     {% if commits %}
     <ul>
-    {% for ele in commits %}
-        <li><a href="/{{ username }}/{{ repo_name }}/{{ele.sha}}/">{{ ele.commit.message }}</a></li>
-    {% endfor %}
+      <form method="POST">
+        {% csrf_token %}
+        {% for ele in commits %}
+            <input type="checkbox" name="ref_num" value="{{ ele.sha }}">{{ ele.commit.message }}<br>
+        {% endfor %}
+        <input type="submit" name="" value="Submit"> 
+      </form>
     </ul>
     {% endif %}
   </body>
